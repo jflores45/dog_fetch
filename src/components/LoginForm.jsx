@@ -18,7 +18,7 @@ function LoginForm() {
     }
   }, [user, navigate]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {  
     e.preventDefault();
     setError(null);
     try {
@@ -45,7 +45,7 @@ function LoginForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        type="email"
+        type="email"         
       />
       <button type="submit">Log In</button>
       {error && <p style={{ color: "red" }}>{error}</p>}

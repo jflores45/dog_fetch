@@ -21,14 +21,12 @@ function FilterBreed({ breeds, onFilterChange }) {
     }
   };
   
-
   useEffect(() => {
     handleFilterChange();
   }, [selectedBreed, zip, ageMin, ageMax, sortAsc, size]);
 
   return (
     <div>
-      
       <select value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
         <option value="">Select a breed</option>
         {breeds.map((breed) => (
@@ -88,6 +86,9 @@ function FilterBreed({ breeds, onFilterChange }) {
         {sortAsc ? 'Ascending ↑' : 'Descending ↓'}
       </button>
 
+      {/* <button type="button" onClick={handleFilterChange}>
+        Search
+      </button> */}
     </div>
   );
 }
