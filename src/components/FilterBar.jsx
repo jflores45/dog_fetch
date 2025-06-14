@@ -5,6 +5,7 @@ function FilterBreed({ breeds, onFilterChange }) {
   const [selectedBreed, setSelectedBreed] = useState('');
   const [ageMin, setAgeMin] = useState(0);
   const [ageMax, setAgeMax] = useState(10);
+  // const [sortField, setSortField] = useState("age");
   const [sortAsc, setSortAsc] = useState(true);
   const [size, setSize] = useState('');
 
@@ -15,6 +16,7 @@ function FilterBreed({ breeds, onFilterChange }) {
         zipCodes: zip ? [zip] : [],
         ageMin,
         ageMax,
+        // sort: `${sortField}:${sortAsc ? 'asc' : 'desc'}`,
         sort: sortAsc ? 'asc' : 'desc',
         size: size || undefined,
       });
@@ -27,6 +29,7 @@ function FilterBreed({ breeds, onFilterChange }) {
 
   return (
     <div>
+
       <select value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
         <option value="">Select a breed</option>
         {breeds.map((breed) => (
@@ -65,26 +68,47 @@ function FilterBreed({ breeds, onFilterChange }) {
         onChange={(e) => setAgeMax(Number(e.target.value))}
       />
 
-      <label htmlFor="size">Size:</label>
+      
+      {/* <label htmlFor="sortField">Sort By:</label>
       <select
-        id="size"
-        value={size}
-        onChange={(e) => setSize(e.target.value)}
+        id="sortField"
+        value={sortField}
+        onChange={(e) => setSortField(e.target.value)}
       >
-        <option value="">Any Size</option>
-        <option value="Small">Small</option>
-        <option value="Medium">Medium</option>
-        <option value="Large">Large</option>
-        <option value="XLarge">XLarge</option>
-      </select>
+        <option value="age">Age</option>
+        <option value="breed">Breed</option>
+        <option value="name">Name</option>
+      </select> */}
 
-      <label>Sort by Age:</label>
+      <label>Direction:</label>
       <button
         type="button"
         onClick={() => setSortAsc(!sortAsc)}
       >
         {sortAsc ? 'Ascending ↑' : 'Descending ↓'}
       </button>
+      
+
+      <label htmlFor="size">Results per page:</label>
+      <select
+        id="size"
+        value={size}
+        onChange={(e) => setSize(e.target.value)}
+      >
+        <option value="">Default (25)</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+{/* 
+      <label>Sort by Age:</label>
+      <button
+        type="button"
+        onClick={() => setSortAsc(!sortAsc)}
+      >
+        {sortAsc ? 'Ascending ↑' : 'Descending ↓'}
+      </button> */}
 
       {/* <button type="button" onClick={handleFilterChange}>
         Search

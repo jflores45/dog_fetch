@@ -89,11 +89,11 @@ const fetchDogDetails = async (dogIds) => {
 const fetchDogs = async (filters) => {
   try {
     const query = buildQuery(filters);
-    const res = await fetch("/dogs/search?${query}", {
+    const res = await fetch(`/dogs/search?${query}`, {
       method: 'GET',
       credentials: 'include',
     });
-
+    console.log("Built query string:", query);
 
     const searchData = await res.json();
     const dogIds = searchData.resultIds;
@@ -111,7 +111,6 @@ const fetchDogs = async (filters) => {
     console.error("Error fetching dogs with filters:", error);
   }
 };
-
 
 const handleFilterChange = (filters) => {
   fetchDogs(filters);
