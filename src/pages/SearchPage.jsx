@@ -9,8 +9,8 @@ const SearchPage = () => {
   const { user } = useAuth();
   const [breeds, setBreeds] = useState([]);
   const [dogs, setDogs] = useState([]);
+  const [match, setMatch] = useState(null);
   
-  // const [dogs, setDogs] = useState([]);
 
   useEffect(() => {
     console.log("SearchPage mounted. User:", user);
@@ -102,7 +102,6 @@ const fetchDogs = async (filters) => {
       setDogs([]);
       return;
     }
-
     const data = await fetchDogDetails(dogIds);
     setDogs(data);
     console.log("Filtered dog results:", data);
@@ -116,12 +115,40 @@ const handleFilterChange = (filters) => {
   fetchDogs(filters);
 };
 
+const dogMatch = async() => {
+  try {
+    if (!dogs.length) return;
+
+    const res = await fetch('/dogs/match', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(dogs.map((dog) => dog.id)),
+      credentials: 'include',
+    });
+  
+    if(!res.ok){
+      throw new Error(`Failed to match dog: ${res.statusText}`);
+    }
+
+    const { match } = await res.json();
+    setMatch(match);
+    console.log('Matched dog ID:', match); 
+  } 
+  catch(error){
+    console.error('Error matching dog:', error);
+    return null;
+  }
+};
+const findMatch = () => {
+  dogMatch();
+};
+
   return (
     <div>
       <h1>Hi, Welcome to the Search Page!</h1>
-     
       <FilterBreed breeds={breeds} onFilterChange={handleFilterChange}/>
-      <DogList dogs={dogs} />
+      <button onClick={dogMatch}>Find My Match</button>
+      <DogList dogs={dogs} match={match}/>
     </div>
   );
 };

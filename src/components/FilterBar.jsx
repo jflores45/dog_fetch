@@ -101,18 +101,7 @@ function FilterBreed({ breeds, onFilterChange }) {
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
-{/* 
-      <label>Sort by Age:</label>
-      <button
-        type="button"
-        onClick={() => setSortAsc(!sortAsc)}
-      >
-        {sortAsc ? 'Ascending ↑' : 'Descending ↓'}
-      </button> */}
 
-      {/* <button type="button" onClick={handleFilterChange}>
-        Search
-      </button> */}
     </div>
   );
 }
