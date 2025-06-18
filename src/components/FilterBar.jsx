@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './FilterBar.css';
 
 function FilterBreed({ breeds, onFilterChange }) {
   const [zip, setZip] = useState('');
@@ -16,7 +17,6 @@ function FilterBreed({ breeds, onFilterChange }) {
         zipCodes: zip ? [zip] : [],
         ageMin,
         ageMax,
-        // sort: `${sortField}:${sortAsc ? 'asc' : 'desc'}`,
         sort: sortAsc ? 'asc' : 'desc',
         size: size || undefined,
       });
@@ -29,7 +29,6 @@ function FilterBreed({ breeds, onFilterChange }) {
 
   return (
     <div>
-
       <select value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
         <option value="">Select a breed</option>
         {breeds.map((breed) => (
@@ -47,6 +46,15 @@ function FilterBreed({ breeds, onFilterChange }) {
         value={zip}
         onChange={(e) => setZip(e.target.value)}
       />
+
+      {/* <select value={selectZip} onChange={(e) => setZip(e.target.value)}>
+        <option value="">Select a breed</option>
+        {Zips.map((zip) => (
+          <option key={zip} value={zip}>
+            {zip}
+          </option>
+        ))}
+      </select> */}
 
       <label htmlFor="ageMin">Age Min:</label>
       <input

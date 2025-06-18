@@ -15,7 +15,13 @@ export default defineConfig({
         target: 'https://frontend-take-home-service.fetch.com',
         changeOrigin: true,
         secure: true,
+      },
+      '/locations': {
+        target: 'https://frontend-take-home-service.fetch.com',
+        changeOrigin: true,
+        secure: true,
       }
+      
     }
   }
 })

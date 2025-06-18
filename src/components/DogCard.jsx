@@ -16,8 +16,9 @@ const DogList = ({dogs, match}) => {
             className={`dog-card ${dog.id === match ? 'highlight' : ''}`}
             >
             <h2>{dog.name}</h2>
+            <p>Age: {dog.age}</p>
             <img src={dog.img} alt={dog.name} />
-            <p>{dog.breed}</p>
+          
           </div>
         ))}
       </div>

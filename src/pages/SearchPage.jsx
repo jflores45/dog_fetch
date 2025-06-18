@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import DogList from '../components/DogCard';
 import FilterBreed from '../components/FilterBar';
+import FilterLocation from '../components/LocationBar';
 import { useAuth } from '../context/AuthContext';
-
+import './SearchPage.css';
 // const BASE_URL = "https://frontend-take-home-service.fetch.com";
 
 const SearchPage = () => {
   const { user } = useAuth();
   const [breeds, setBreeds] = useState([]);
   const [dogs, setDogs] = useState([]);
+  const [loc, setLoc] = useState([]);
   const [match, setMatch] = useState(null);
   
 
@@ -38,6 +40,7 @@ const SearchPage = () => {
     };
     fetchBreeds();
 }, [user]);
+
 
 const buildQuery = (filters) =>{
   const params = new URLSearchParams();
@@ -129,7 +132,6 @@ const dogMatch = async() => {
     if(!res.ok){
       throw new Error(`Failed to match dog: ${res.statusText}`);
     }
-
     const { match } = await res.json();
     setMatch(match);
     console.log('Matched dog ID:', match); 
@@ -139,16 +141,45 @@ const dogMatch = async() => {
     return null;
   }
 };
-const findMatch = () => {
-  dogMatch();
-};
 
+const Logout = async() =>{
+  try{
+    if (!user) return;
+  }
+  catch(error){
+    console.error('Error matching dog:', error);
+    return null;
+  }
+};
+// const findMatch = () => {
+//   dogMatch();
+// };
   return (
-    <div>
+    <div className="container">
       <h1>Hi, Welcome to the Search Page!</h1>
-      <FilterBreed breeds={breeds} onFilterChange={handleFilterChange}/>
-      <button onClick={dogMatch}>Find My Match</button>
-      <DogList dogs={dogs} match={match}/>
+
+      <div className="main-content">
+        <div className="filters-buttons">
+          <div className="filters">
+            <FilterBreed breeds={breeds} onFilterChange={handleFilterChange} />
+            <FilterLocation onZipCodes={(zipCodes) => handleFilterChange({ zipCodes })} />
+          </div>
+
+          <div className="buttons">
+            <button onClick={dogMatch}>Find My Match</button>
+            <button onClick={Logout}>Logout</button>
+          </div>
+        </div>
+
+        <div className="matches">
+          <DogList dogs={dogs} match={match} />
+        </div>
+      </div>
+
+      <div className="pagination">
+        <button onClick={Logout}>Prev</button>
+        <button onClick={Logout}>Next</button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,62 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  /* Main content flex container */
+  .main-content {
+    display: flex;
+    height: 600px;          /* fixed height */
+    gap: 2rem;
+    border: 1px solid #ccc; /* optional */
+  }
+  
+  /* Left side: fixed width, no scroll */
+  .filters-buttons {
+    width: 350px;          /* fixed width */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* no scrolling here */
+    /* height defaults to container height */
+    box-sizing: border-box;
+  }
+  
+  /* Buttons pushed to bottom */
+  .buttons {
+    margin-top: auto;      /* push buttons to bottom */
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Right side: takes remaining space, scrollable */
+  .matches {
+    flex-grow: 1;          /* take remaining width */
+    height: 100%;
+    overflow-y: auto;      /* scroll vertically */
+    border-left: 1px solid #ddd;
+    padding-left: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Pagination below */
+  .pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Optional button styling */
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  }
+  
