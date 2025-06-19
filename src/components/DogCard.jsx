@@ -26,7 +26,3 @@ const DogList = ({dogs, match}) => {
   };
 
 export default DogList;
-
-
-// fix following bugs: dogs not updating when selcting filter option 
-// logout on refresh of page

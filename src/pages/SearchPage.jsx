@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import Nav from '../components/Navbar';
 import DogList from '../components/DogCard';
 import FilterBreed from '../components/FilterBar';
 import FilterLocation from '../components/LocationBar';
 import { useAuth } from '../context/AuthContext';
 import './SearchPage.css';
-// const BASE_URL = "https://frontend-take-home-service.fetch.com";
 
 const SearchPage = () => {
   const { user } = useAuth();
@@ -12,7 +12,11 @@ const SearchPage = () => {
   const [dogs, setDogs] = useState([]);
   const [loc, setLoc] = useState([]);
   const [match, setMatch] = useState(null);
-  
+
+  const [currentFilters, setCurrentFilters] = useState({});
+  const [paginationCursor, setPaginationCursor] = useState(null);
+  const [totalResults, setTotalResults] = useState(0);
+  const dogsPerPage = 25;
 
   useEffect(() => {
     console.log("SearchPage mounted. User:", user);
@@ -24,7 +28,7 @@ const SearchPage = () => {
         const res = await fetch("/dogs/breeds", {
           method: 'GET',
           credentials: 'include',
-        });
+      });
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -42,35 +46,32 @@ const SearchPage = () => {
 }, [user]);
 
 
-const buildQuery = (filters) =>{
+const buildQuery = (filters, cursor = null) => {
   const params = new URLSearchParams();
 
   if (filters.breeds?.length) {
     filters.breeds.forEach(breed => params.append("breeds", breed));
   }
-
   if (filters.zipCodes?.length) {
     filters.zipCodes.forEach(zip => params.append("zipCodes", zip));
   }
-
   if (filters.ageMin !== undefined) {
     params.append("ageMin", filters.ageMin);
   }
-
   if (filters.ageMax !== undefined) {
     params.append("ageMax", filters.ageMax);
   }
-
   if (filters.sort) {
     params.append("sort", `age:${filters.sort}`);
   }
 
-  if (filters.size) {
-    params.append("size", filters.size);
+  params.append("size", dogsPerPage);
+
+  if (cursor) {
+    params.append("from", cursor);
   }
 
   return params.toString();
-
 };
 
 const fetchDogDetails = async (dogIds) => {
@@ -89,33 +90,45 @@ const fetchDogDetails = async (dogIds) => {
   return dogData;
 };
 
-const fetchDogs = async (filters) => {
+const fetchDogs = async (filters, cursor = null) => {
   try {
-    const query = buildQuery(filters);
+    const query = buildQuery(filters, cursor);
     const res = await fetch(`/dogs/search?${query}`, {
       method: 'GET',
       credentials: 'include',
     });
     console.log("Built query string:", query);
+    
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
     const searchData = await res.json();
     const dogIds = searchData.resultIds;
 
-    if(!dogIds.length){
+    setTotalResults(searchData.total);
+
+    if (!dogIds.length) {
       setDogs([]);
+      setPaginationCursor(null);
       return;
     }
+
     const data = await fetchDogDetails(dogIds);
     setDogs(data);
-    console.log("Filtered dog results:", data);
-  
+
+    // Save next and prev cursors
+    setPaginationCursor({
+      next: searchData.next || null,
+      prev: searchData.prev || null
+    });
+
   } catch (error) {
     console.error("Error fetching dogs with filters:", error);
   }
 };
 
 const handleFilterChange = (filters) => {
-  fetchDogs(filters);
+  setCurrentFilters(filters);
+  fetchDogs(filters, null);
 };
 
 const dogMatch = async() => {
@@ -142,20 +155,28 @@ const dogMatch = async() => {
   }
 };
 
-const Logout = async() =>{
-  try{
-    if (!user) return;
-  }
-  catch(error){
-    console.error('Error matching dog:', error);
-    return null;
+const handleNextPage = () => {
+  if (paginationCursor?.next) {
+    // The API returns the next query string, e.g. "breeds=...&from=cursor123"
+    // We can call fetchDogs with the existing filters and the 'from' param from next query
+    // To extract 'from' cursor from the query string:
+    const urlParams = new URLSearchParams(paginationCursor.next);
+    const cursor = urlParams.get('from');
+    fetchDogs(currentFilters, cursor);
   }
 };
-// const findMatch = () => {
-//   dogMatch();
-// };
+
+const handlePrevPage = () => {
+  if (paginationCursor?.prev) {
+    const urlParams = new URLSearchParams(paginationCursor.prev);
+    const cursor = urlParams.get('from');
+    fetchDogs(currentFilters, cursor);
+  }
+};
+
   return (
     <div className="container">
+      <Nav/>
       <h1>Hi, Welcome to the Search Page!</h1>
 
       <div className="main-content">
@@ -167,7 +188,6 @@ const Logout = async() =>{
 
           <div className="buttons">
             <button onClick={dogMatch}>Find My Match</button>
-            <button onClick={Logout}>Logout</button>
           </div>
         </div>
 
@@ -177,8 +197,9 @@ const Logout = async() =>{
       </div>
 
       <div className="pagination">
-        <button onClick={Logout}>Prev</button>
-        <button onClick={Logout}>Next</button>
+        <button onClick={handlePrevPage} disabled={!paginationCursor?.prev}>Prev</button>
+        <button onClick={handleNextPage} disabled={!paginationCursor?.next}>Next</button>
+        <span>{dogs.length} of {totalResults} dogs</span>
       </div>
     </div>
   );

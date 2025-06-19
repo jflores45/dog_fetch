@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 import LoginForm from "./pages/LoginPage";
 import SearchPage from "./pages/SearchPage";
+import FavoritesPage from "./pages/Favorites";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
     </AuthProvider>
   </Router>
