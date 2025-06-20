@@ -12,7 +12,7 @@ const LoginPage = () => {
       </div>
 
       <div className='right_container'>
-        <img src="assets/login_dog_page"/>
+        <img src="/assets/dog-lab.jpg"/>
       </div>
     </div>
   );

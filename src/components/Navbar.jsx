@@ -34,7 +34,7 @@ function Nav(){
 
     return (
         <nav style={{ display: "flex", justifyContent: "space-between", padding: "1rem" }}>
-            <img src="../assets/fetch_logo.png" alt="Fetch Logo" style={{ height: 40 }} />
+            <img src="../assets/fetch_logo.png" alt="Fetch Logo" style={{ height: 80 }} />
             <div>
                 <button onClick={handleFavoriteClick}>
                     Favorites ({favorite.length})
