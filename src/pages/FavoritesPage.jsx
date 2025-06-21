@@ -1,8 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+import { useFavorites } from "../context/FavoritesContext";
+import DogList from "../components/DogCard";
 
 const FavoritesPage = () => {
-  const [favoriteDogs, setFavoriteDogs] = useState([]);
+  const { favorites } = useFavorites();
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("favoriteDogs")) || [];
@@ -23,6 +25,7 @@ const FavoritesPage = () => {
     <div>
       <h2>Your Favorite Dogs</h2>
       {/* Render your DogList here */}
+      <DogList dogs={favorites} match={null} />
     </div>
   );
 }

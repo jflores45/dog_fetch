@@ -3,7 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 import LoginForm from "./pages/LoginPage";
 import SearchPage from "./pages/SearchPage";
-import FavoritesPage from "./pages/Favorites";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
