@@ -12,7 +12,10 @@ const LoginPage = () => {
       </div>
 
       <div className='right_container'>
-        <img src="/assets/dog-lab.jpg"/>
+        <div className='image_wrapper'>
+          <div className="bg_shape"></div>
+          <img src="/assets/dog-lab.jpg"/>
+        </div>
       </div>
     </div>
   );

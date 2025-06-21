@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { FaHeart } from 'react-icons/fa';
+
 
 function Nav(){
     const { user } = useAuth();
@@ -34,15 +36,17 @@ function Nav(){
 
     return (
         <nav style={{ display: "flex", justifyContent: "space-between", padding: "1rem" }}>
-            <img src="../assets/fetch_logo.png" alt="Fetch Logo" style={{ height: 80 }} />
+            <img src="../assets/fetch_logo.png" alt="Fetch Logo" style={{ height: 100 }} />
             <div>
                 <button onClick={handleFavoriteClick}>
-                    Favorites ({favorite.length})
+                  ❤️ ({favorite.length})
                 </button>
+
                 <button onClick={handleLogout}>Logout</button>
             </div>
         </nav>
     );
+    
 }
 
 export default Nav;

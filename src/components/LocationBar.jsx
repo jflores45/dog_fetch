@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './LocationBar.css';
 
 export default function FilterLocation({ onZipCodes }) {
   const [city, setCity] = useState('');
@@ -32,7 +33,7 @@ export default function FilterLocation({ onZipCodes }) {
   };
 
   return (
-    <div>
+   <div className="location-filter">
       <input
         type="text"
         placeholder="City"

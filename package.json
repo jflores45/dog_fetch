@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.1"
   },
   "devDependencies": {
@@ -24,5 +26,18 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jflores45/dog_fetch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jflores45/dog_fetch/issues"
+  },
+  "homepage": "https://github.com/jflores45/dog_fetch#readme"
 }

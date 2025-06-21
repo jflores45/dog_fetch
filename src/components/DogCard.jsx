@@ -9,15 +9,16 @@ const DogList = ({dogs, match}) => {
     if (dogs.length === 0) return <p>Loading dogs...</p>;
   
     return (
-      <div>
+     <div className="dog-list-container">
         {dogs.map((dog) => (
           <div 
             key={dog.id} 
             className={`dog-card ${dog.id === match ? 'highlight' : ''}`}
             >
+            <img src={dog.img} alt={dog.name} />
             <h2>{dog.name}</h2>
             <p>Age: {dog.age}</p>
-            <img src={dog.img} alt={dog.name} />
+            
           
           </div>
         ))}

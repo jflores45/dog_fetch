@@ -4,14 +4,17 @@ body{
 .login_container {
     display: flex;
     align-items: center;
-    display: flex;
-    margin: 100px;
-    
+    height: 100vh;
+    padding: 2rem;
+    gap: 10px;
+    box-sizing: border-box;
 }
 .left_container {
   flex: 1;
   align-items: flex-start;
-
+  /* flex-direction: column;
+  justify-content: center;
+  gap: 1rem; */
 }
 .right_container{
   flex: 1;
@@ -19,6 +22,34 @@ body{
   justify-content: center;
   align-items: center;
 }
+.image_wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.image_wrapper img {
+  width: 150%;
+  height: 150%;
+  object-fit: cover;
+  border-radius: 50%; 
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.bg_shape {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 270px;
+  height: 180px;
+  background-color: #fcd34d; 
+  border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%; 
+  z-index: 1;
+  transform: rotate(-15deg);
+}
+
 form {
   display: flex;
   flex-direction: column;

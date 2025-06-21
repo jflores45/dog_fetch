@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { login as apiLogin } from "../services/api"; // assume this sends the request to your backend
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import './LoginForm.css';
 
 function LoginForm() {
   const [name, setName] = useState("");
@@ -11,7 +12,6 @@ function LoginForm() {
   const { login, user } = useAuth(); // from AuthContext
   const navigate = useNavigate();
 
-  // 🔁 Watch for user state to change, then navigate
   useEffect(() => {
     if (user) {
       navigate("/search");
@@ -22,10 +22,9 @@ function LoginForm() {
     e.preventDefault();
     setError(null);
     try {
-      await apiLogin({ name, email }); // send login request
-      login({ name, email }); // update global context to store for future use
+      await apiLogin({ name, email });
+      login({ name, email });
      
-      // ⛔ DO NOT call navigate here — let useEffect handle that
     } catch (err) {
       setError("Login failed. Please check your info. ⛔");
       console.error(err);
