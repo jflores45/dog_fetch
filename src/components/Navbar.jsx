@@ -1,28 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect,  useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useFavorites } from "../context/FavoritesContext";
 import { FaHeart } from 'react-icons/fa';
-
+import "./Navbar.css"; 
 
 function Nav(){
     const { user } = useAuth();
-    const [favorite, setFavorite] = useState([]);
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        const stored = localStorage.getItem("favoriteDogs");
-        if (stored) {
-          setFavorites(JSON.parse(stored));
-        }
-    }, []);
+    const navigate = useNavigate();
+    const { favorites } = useFavorites();
 
     const handleFavoriteClick = () => {
-        navigate("/favorites"); // assumes you have a /favorites route/page
+        navigate("/favorites");
     };
     
-
     const handleLogout = async () => {
-        try {
+        try { 
           await fetch("/auth/logout", {
             method: "POST",
             credentials: "include",
@@ -35,14 +28,14 @@ function Nav(){
     };
 
     return (
-        <nav style={{ display: "flex", justifyContent: "space-between", padding: "1rem" }}>
+        <nav className="nav">
             <img src="../assets/fetch_logo.png" alt="Fetch Logo" style={{ height: 100 }} />
             <div>
-                <button onClick={handleFavoriteClick}>
-                  ❤️ ({favorite.length})
+                <button  className="favorite-button" onClick={handleFavoriteClick}>
+                  ❤️ ({favorites.length})
                 </button>
 
-                <button onClick={handleLogout}>Logout</button>
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
             </div>
         </nav>
     );

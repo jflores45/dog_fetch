@@ -3,15 +3,110 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  background-color: #f8f8f8;
+  /* background-color: white; */
   border-radius: 12px;
 }
 
 .form-control {
   display: flex;
   flex-direction: column;
-  min-width: 150px;
+  min-width: 200px;
   flex: 1 1 200px;
+}
+.form-control select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  /* color: #144e16; */
+  background-color: rgb(241, 189, 15);
+  /* border: 2px solid #144e16; */
+  border-radius: 6px;
+  /* cursor: pointer; */
+  /* transition: border-color 0.3s, background-color 0.3s; */
+}
+
+/* .form-control button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #144e16;
+  background-color: transparent;
+  border: 2px solid #144e16;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+} */
+ 
+.toggle-switch {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  background-color: gold;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  /* color: white; */
+  font-size: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.toggle-switch .option {
+  width: 50%;
+  text-align: center;
+  z-index: 2;
+}
+
+.toggle-switch .slider {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  border-radius: 20px;
+  transition: left 0.3s;
+  z-index: 1;
+}
+
+.toggle-switch.desc .slider {
+  left: 50%;
+}
+
+.toggle-switch .option:first-child {
+  color: #144e16;
+}
+
+.toggle-switch.desc .option:last-child {
+  color: #144e16;
+}
+
+.toggle-switch.asc .option:first-child {
+  color: #144e16;
+}
+
+/* .form-control button:hover {
+  background-color: #144e16;
+  color: white;
+} */
+
+.form-clear {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff6d4;
+  /* background-color: antiquewhite; */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.form-clear button {
+  /* border: #ccc; */
+  /* border: red; */
 }
 
 label {

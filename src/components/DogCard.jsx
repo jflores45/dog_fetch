@@ -1,5 +1,7 @@
 import { useAuth } from "../context/AuthContext";
 import { useFavorites } from "../context/FavoritesContext";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+
 import './DogCard.css';
 
 const DogList = ({ dogs, match }) => {
@@ -19,18 +21,20 @@ const DogList = ({ dogs, match }) => {
         };
 
         return (
-          <div
-            key={dog.id}
-            className={`dog-card ${dog.id === match ? 'highlight' : ''}`}
-          >
+     <div
+        key={dog.id}
+        className={`dog-card ${dog.id === match ? 'highlight' : ''}`}
+      >
+          <div className="dog-image-container">
             <img src={dog.img} alt={dog.name} />
-            <h2>{dog.name}</h2>
-            <p>Age: {dog.age}</p>
-
-            <button onClick={handleFavorite}>
-              {favorited ? "💔 Unfavorite" : "❤️ Favorite"}
+            <button className="favorite-btn" onClick={handleFavorite}>
+               {favorited ? <FaHeart color="red" /> : <FaRegHeart color="white" />}
             </button>
           </div>
+          <h2>{dog.name}</h2>
+          <p>Age: {dog.age}</p>
+      </div>
+
         );
       })}
     </div>

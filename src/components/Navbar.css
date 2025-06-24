@@ -1,10 +1,38 @@
-/* .nav{
-    display: flex;
-    justify-content: space-between;
-    padding: "1rem";
 
-} */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 1rem; */
+  padding: 1rem 2rem;
+ 
+}
+
 button:hover svg {
   transform: scale(1.1);
   transition: transform 0.2s;
+}
+.favorite-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.favorite-button:hover {
+  transform: scale(1.1);
+}
+
+.logout-button {
+  background-color:rgb(255, 197, 6);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: rgb(233, 181, 9);
 }

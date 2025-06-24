@@ -11,10 +11,11 @@ body{
 }
 .left_container {
   flex: 1;
+  width: 300px;
   align-items: flex-start;
-  /* flex-direction: column;
+  flex-direction: column;
   justify-content: center;
-  gap: 1rem; */
+  /* gap: 1rem; */
 }
 .right_container{
   flex: 1;

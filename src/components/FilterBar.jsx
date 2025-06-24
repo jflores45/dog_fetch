@@ -29,6 +29,12 @@ function FilterBreed({ breeds, onFilterChange }) {
 
   return (
    <div className="filter-form">
+
+      <div className="form-clear">
+        <h3>Advanced Search</h3>
+        <button>Clear All</button>
+      </div>
+
       <div className="form-control">
         <label htmlFor="breed">Breed:</label>
         <select id="breed" value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
@@ -76,11 +82,20 @@ function FilterBreed({ breeds, onFilterChange }) {
         />
       </div>
 
-      <div className="form-control">
+      {/* <div className="form-control">
         <label>Direction:</label>
         <button type="button" onClick={() => setSortAsc(!sortAsc)}>
           {sortAsc ? 'Ascending ↑' : 'Descending ↓'}
         </button>
+      </div> */}
+      
+      <div className="form-control">
+        <label>Direction:</label>
+        <div className={`toggle-switch ${sortAsc ? 'asc' : 'desc'}`} onClick={() => setSortAsc(!sortAsc)}>
+          <div className="option">ASC</div>
+          <div className="option">DESC</div>
+          <div className="slider" />
+        </div>
       </div>
 
       <div className="form-control">
