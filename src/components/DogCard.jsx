@@ -1,7 +1,6 @@
 import { useAuth } from "../context/AuthContext";
 import { useFavorites } from "../context/FavoritesContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-
 import './DogCard.css';
 
 const DogList = ({ dogs, match }) => {

@@ -183,18 +183,19 @@ const handlePrevPage = () => {
   return (
     <div className="container">
       <Nav/>
-      <h1>Hi, Welcome to the Search Page!</h1>
+      <h1>Hi, Welcome to Fetch's Dog Adoption Search!</h1>
 
       <div className="result-container">
           <div>
             <h3> Results ({totalResults}) </h3>
           </div>
-          <div>
+          <div className='sort-dropdown'>
             <label htmlFor="sort">Sort by: </label>
                 <select id="sort" onChange={(e) => handleSortChange(e.target.value)}>
                   <option value="">Select</option>
                   <option value="breed">Breed</option>
                   <option value="name">Name</option>
+                  <option value="age">Age</option>
                 </select>
           </div>
       </div>
@@ -207,13 +208,13 @@ const handlePrevPage = () => {
             <FilterLocation onZipCodes={(zipCodes) => handleFilterChange({ zipCodes })} />
           </div>
 
-          <div className="buttons">
+          <div className="match-btn">
             <button onClick={dogMatch}>Find My Match</button>
           </div>
 
         </div>
 
-        <div className="matches">
+        <div className="filter-dogs">
           <DogList dogs={dogs} match={match} />
         </div>
       </div>

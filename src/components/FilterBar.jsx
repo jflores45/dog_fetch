@@ -26,13 +26,18 @@ function FilterBreed({ breeds, onFilterChange }) {
   useEffect(() => {
     handleFilterChange();
   }, [selectedBreed, zip, ageMin, ageMax, sortAsc, size]);
+  
+  const handleClear = (e) => {
+    e.preventDefault();
+    // clear form logic here
+  };
 
   return (
    <div className="filter-form">
 
       <div className="form-clear">
-        <h3>Advanced Search</h3>
-        <button>Clear All</button>
+        <div><h3>Advanced Search</h3></div>
+        <div><a href="#" onClick={handleClear}>Clear All</a></div>
       </div>
 
       <div className="form-control">

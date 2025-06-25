@@ -26,7 +26,7 @@ function LoginForm() {
       login({ name, email });
      
     } catch (err) {
-      setError("Login failed. Please check your info. ⛔");
+      setError("Login failed. Please check your info.");
       console.error(err);
     }
   };

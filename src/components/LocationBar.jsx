@@ -34,6 +34,7 @@ export default function FilterLocation({ onZipCodes }) {
 
   return (
    <div className="location-filter">
+      <label>Location:</label>
       <input
         type="text"
         placeholder="City"

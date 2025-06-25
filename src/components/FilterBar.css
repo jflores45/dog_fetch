@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* background-color: white; */
   border-radius: 12px;
 }
@@ -10,18 +10,30 @@
 .form-control {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
-  flex: 1 1 200px;
+  min-width: 250px;
+  flex: 1 1 250px;
 }
-.form-control select {
-  padding: 0.5rem;
+
+.form-control input {
+  color: grey;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
   font-size: 1rem;
-  /* color: #144e16; */
-  background-color: rgb(241, 189, 15);
-  /* border: 2px solid #144e16; */
   border-radius: 6px;
-  /* cursor: pointer; */
-  /* transition: border-color 0.3s, background-color 0.3s; */
+}
+
+.form-control select {
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: grey;
+  /* background-color: #fffcf; */
+  background-color: #f9f8fa;
+  border-radius: 6px;
+}
+.form-control select option {
+  color: black;
+  background-color: white;
+  border: none;
 }
 
 /* .form-control button {
@@ -37,77 +49,100 @@
  
 .toggle-switch {
   position: relative;
-  width: 200px;
+  width: 250px;
   height: 40px;
-  background-color: gold;
-  border-radius: 20px;
+  background-color:gold;
+  /* border: 2px solid #ddb328; */
+  border: 2px solid  rgb(255, 196, 0);
+  border-radius: 20px;;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  cursor: pointer;
   font-weight: bold;
-  /* color: white; */
-  font-size: 1rem;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
+/* Individual options */
 .toggle-switch .option {
   width: 50%;
   text-align: center;
   z-index: 2;
+  cursor: pointer;
+  padding: 10px 0;
+  user-select: none;
+  position: relative;
+  color: white;
 }
 
+/* Divider between options */
+.toggle-switch .option:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background-color: #d3a40c; /* line color */
+  z-index: 3;
+}
+
+/* The slider background */
 .toggle-switch .slider {
   position: absolute;
-  width: 40%;
-  height: 100%;
-  top: 0;
+  width: 50%;
+  height: 95%;
+  top: 10;
   left: 0;
-  background-color: white;
+  background-color: rgb(255, 196, 0);
+  /* background-color: white; */
   border-radius: 20px;
   transition: left 0.3s;
   z-index: 1;
 }
 
+/* Move slider to right for DESC */
 .toggle-switch.desc .slider {
   left: 50%;
 }
 
-.toggle-switch .option:first-child {
-  color: #144e16;
-}
-
-.toggle-switch.desc .option:last-child {
-  color: #144e16;
-}
-
+/* Text colors */
 .toggle-switch.asc .option:first-child {
-  color: #144e16;
+  /* color: gold; */
+}
+.toggle-switch.asc .option:last-child {
+  color: white; /* not selected */
 }
 
-/* .form-control button:hover {
-  background-color: #144e16;
-  color: white;
-} */
+.toggle-switch.desc .option:first-child {
+  color: white; /* not selected */
+}
+.toggle-switch.desc .option:last-child {
+  color: gold; /* selected */
+}
+
+
 
 .form-clear {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff6d4;
-  /* background-color: antiquewhite; */
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 12px;
+  flex: 1 1 100%;
+  /* padding: 10px; */
+  /* margin-bottom: 1rem; */
 }
 
-.form-clear button {
-  /* border: #ccc; */
-  /* border: red; */
+.form-clear a {
+  color: #7f8891;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
 }
+
+.form-clear a:hover {
+  text-decoration: none;
+  color: #63686d;
+}
+
 
 label {
   margin-bottom: 0.25rem;
