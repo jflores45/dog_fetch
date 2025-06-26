@@ -1,0 +1,22 @@
+.favorite-content {
+  background-color: #fcfaf2;
+  padding: 40px 60px;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  /* font-size: 2rem; */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.favs {
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+  /* gap: 30px; */
+  padding: 20px 0;
+}

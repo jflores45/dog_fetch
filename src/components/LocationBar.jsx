@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './LocationBar.css';
 
-export default function FilterLocation({ onZipCodes }) {
+export default function FilterLocation({ onZipCodes, clearTrigger }) {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+
+  useEffect(() => {
+    setCity('');
+    setState('');
+  }, [clearTrigger]);
 
   const handleSearch = async () => {
     try {
@@ -24,7 +29,7 @@ export default function FilterLocation({ onZipCodes }) {
       const data = await res.json();
       console.log('HERE ARE LOCATIONS:', data);
       
-      const zipCodes = data.results.map(loc => loc.zipCode);
+      const zipCodes = data.results.map(loc => loc.zip_code);
       onZipCodes(zipCodes);
 
     } catch (err) {
@@ -34,7 +39,7 @@ export default function FilterLocation({ onZipCodes }) {
 
   return (
    <div className="location-filter">
-      <label>Location:</label>
+    <label>Location:</label>
       <input
         type="text"
         placeholder="City"

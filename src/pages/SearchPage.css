@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
     background-color: #fcfaf2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100%;
   }
-
   .container {
     max-width: 1600px;
     height: 1200px;
@@ -12,39 +12,44 @@
     padding: 2rem;
     background-color: #fcfaf2;
   }
-
+  .results p{
+    font-weight: 400;
+    font-size: medium;
+  }
   .result-container {
     display: flex;
     align-items: center;  
     justify-content: space-between;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
     width: 95%;
     margin: 0 auto;           
   }
  
-  h1 {
+  .container h1 {
     padding-left: 40px;
     margin-bottom: 2rem;
   }
-
   /* sort options dropdown  */
+  .sort-dropdown label{
+    font-weight: 400;
+    font-size: medium;
+  }
+
   .sort-dropdown select {
-    background-color: #2e7d32; 
-    border: none;
-    color: white;
     border-radius: 6px;
     padding: 10px 40px 10px 20px;
     font-size: 1rem;
     cursor: pointer;
-    /* text-align: center; */
-    cursor: pointer;
-    outline: none;             /* Remove blue focus ring */
-    box-shadow: none;          /* Remove shadow that looks like a border */
-     margin: 0px;
-  }
-  .sort-dropdown select option{
-    color: black;
-    background-color: white;
+    outline: none;             
+    box-shadow: none; 
     margin: 0px;
+    font-weight: 1.5rem;
+
+    color: grey;
+    border: 1px solid #ccc;
+    background-color: #f9f8fa;
   }
 
   /* MAIN DOG CARDS CONTENT PAGE  */
@@ -52,23 +57,23 @@
     display: flex;
     height: 900px;
     gap: 2rem;
-    /* border: 1px solid #ccc; */
     padding: 50px;
-    /* background-color: bisque; */
   }
   
   .filters-buttons {
     width: 400px; 
-    height: 800px;
+    height: 850px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 60px;
     margin-right: 50px;
-    /* box-sizing: border-box; */
     background-color: white;
+    border: 1px solid #ccc;
     border-radius: 0.6rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
+
   .buttons {
     margin-top: auto; 
     display: flex;
@@ -77,37 +82,98 @@
 
   .filter-dogs {
     flex-grow: 1;
-    height: 100%;
+    height: 108%;
     overflow-y: auto;
     border-left: 1px solid #ddd;
     padding-left: 1rem;
     box-sizing: border-box;
   }
 
-  .match-btn button{
-    background-color: #f1bd0f;
-    /* color: black; */
-    color:white;
+  .match-btn {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .match-btn button {
+    width: 100%;
+    background-color:rgb(255, 197, 6);
+    color: white;
     border: none;
     border-radius: 8px;
-    margin-top: 0.25rem;
-    cursor: default;
-    width: 250px;
-    height: 40px; 
-    margin-top: 0px;
+    cursor: pointer;
+    font-weight: 1.75rem;
+    height: 40px;
+    transition: background-color 0.3s ease;
   }
-  
+
+  .match-btn button:hover {
+    background-color: rgb(233, 181, 9);
+  }
+
   /* Pagination below */
   .pagination {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
+    padding: 50px;
   }
-  
-  button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.8rem;
+    
+  .pagination button {
+    font-size: 1rem;
+    background: none;
+    /* background-color:  #e6e5e3d0; */
+    background-color:  #f5ecdad0;
+    border: none;
+    cursor: pointer;
+    /* color: #333; */
+  }
+  .pagination span {
+    font-weight: 400;
+  } 
+
+  /* match overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0,0,0,0.6); */
+    background:  rgb(255, 243, 224, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: white;
+    /* background:  rgb(255, 243, 224, 0.6); */
+    border: 3px solid gold;
+    /* background-color: */
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    max-width: 400px;
+    text-align: center;
+  }
+  .match-card img {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
     cursor: pointer;
   }
-  

@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    con
+    console.log("User logged out from context");
   };
 
   return (

@@ -8,7 +8,15 @@ const DogList = ({ dogs, match }) => {
   const { addFavorite, removeFavorite, isFavorited } = useFavorites();
 
   if (!user) return <p>Please log in first.</p>;
-  if (!dogs || dogs.length === 0) return <p>Loading dogs...</p>;
+  if (!dogs || dogs.length === 0) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <h3>Loading dogs...</h3>
+        <img src="./assets/dog-animation.gif" alt="Loading dogs..." style={{ width: '900px' }} />
+        {/* <h3>Loading dogs...</h3> */}
+      </div>
+    );
+  }
 
   return (
     <div className="dog-list-container">
@@ -20,10 +28,11 @@ const DogList = ({ dogs, match }) => {
         };
 
         return (
-     <div
+      <div
         key={dog.id}
-        className={`dog-card ${dog.id === match ? 'highlight' : ''}`}
-      >
+          className="dog-card"
+        >
+
           <div className="dog-image-container">
             <img src={dog.img} alt={dog.name} />
             <button className="favorite-btn" onClick={handleFavorite}>

@@ -2,11 +2,10 @@ import { useEffect,  useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
-import { FaHeart } from 'react-icons/fa';
 import "./Navbar.css"; 
 
 function Nav(){
-    const { user } = useAuth();
+    const { logout } = useAuth();
     const navigate = useNavigate();
     const { favorites } = useFavorites();
 
@@ -15,16 +14,18 @@ function Nav(){
     };
     
     const handleLogout = async () => {
-        try { 
-          await fetch("/auth/logout", {
-            method: "POST",
-            credentials: "include",
-          });
+        const res = await fetch("/auth/logout", {
+          method: "POST",
+          credentials: "include",
+        });
 
+        if (res.ok) {
+          logout();
           navigate("/");
-        } catch (error) {
-          console.error("Error logging out:", error);
+        } else {
+          console.error("Logout failed:", res.status);
         }
+
     };
 
     return (

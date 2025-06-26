@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
 import DogList from "../components/DogCard";
+import './FavoritesPage.css';
 
 const FavoritesPage = () => {
   const { favorites } = useFavorites();
@@ -22,10 +23,16 @@ const FavoritesPage = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Your Favorite Dogs</h2>
-      {/* Render your DogList here */}
-      <DogList dogs={favorites} match={null} />
+    <div className='favorite-content'>
+      <div className='title'>
+        <h1>Your Favorite Dogs:</h1>
+      </div>
+
+      <div className='favs'>
+          {/* Render your DogList here */}
+          <DogList dogs={favorites} match={null} />
+      </div>
+    
     </div>
   );
 }

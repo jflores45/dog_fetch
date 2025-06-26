@@ -1,11 +1,11 @@
 form {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 500px;
   margin: 80px auto; /* centers the form horizontally with spacing from top */
   padding: 2rem;
   gap: 1rem;
-  background-color: #f9f9f9; /* optional */
+  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -19,7 +19,7 @@ form input {
 
 form button {
   padding: 0.75rem;
-  background-color: #4caf50;
+  background-color: #144e16;
   color: white;
   border: none;
   border-radius: 6px;
@@ -28,7 +28,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #45a049;
+  background-color: #104111;
 }
 
 form p {

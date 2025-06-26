@@ -12,9 +12,22 @@
   flex-direction: column;
   min-width: 250px;
   flex: 1 1 250px;
+  width: 100%;
 }
 
+.form-control input::placeholder {
+  color: grey;
+}
+
+
 .form-control input {
+  color: grey;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+#zip {
   color: grey;
   border: 1px solid #ccc;
   padding: 0.75rem;
@@ -26,7 +39,6 @@
   padding: 0.75rem;
   font-size: 1rem;
   color: grey;
-  /* background-color: #fffcf; */
   background-color: #f9f8fa;
   border-radius: 6px;
 }
@@ -52,8 +64,8 @@
   width: 250px;
   height: 40px;
   background-color:gold;
-  /* border: 2px solid #ddb328; */
-  border: 2px solid  rgb(255, 196, 0);
+  border: 2px solid  rgba(255, 196, 0, 0.719);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;;
   display: flex;
   align-items: center;
@@ -72,6 +84,7 @@
   user-select: none;
   position: relative;
   color: white;
+  
 }
 
 /* Divider between options */
@@ -119,8 +132,6 @@
 .toggle-switch.desc .option:last-child {
   color: gold; /* selected */
 }
-
-
 
 .form-clear {
   display: flex;

@@ -10,8 +10,13 @@ const SearchPage = () => {
   const { user } = useAuth();
   const [breeds, setBreeds] = useState([]);
   const [dogs, setDogs] = useState([]);
-  const [loc, setLoc] = useState([]);
+  const [locationZips, setLocationZips] = useState([]);
+  const [sortField, setSortField] = useState("age");
+  // const [sortAsc, setSortAsc] = useState(true); 
+
   const [match, setMatch] = useState(null);
+  const [showMatch, setShowMatch] = useState(false);
+  const [clearTrigger, setClearTrigger] = useState(false);
 
   const dogsPerPage = 25;
   const [currentFilters, setCurrentFilters] = useState({});
@@ -19,8 +24,8 @@ const SearchPage = () => {
 
   const [totalResults, setTotalResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(totalResults / dogsPerPage);
-
+  const sizeForPageCount = currentFilters.size || dogsPerPage;
+  const totalPages = Math.ceil(totalResults / sizeForPageCount);
   useEffect(() => {
     console.log("SearchPage mounted. User:", user);
     if (!user) return; // don't fetch unless logged in
@@ -69,7 +74,7 @@ const buildQuery = (filters, cursor = null) => {
     params.append("sort", `age:${filters.sort}`);
   }
 
-  params.append("size", dogsPerPage);
+  params.append("size", filters.size || dogsPerPage);
 
   if (cursor) {
     params.append("from", cursor);
@@ -116,8 +121,9 @@ const fetchDogs = async (filters, cursor = null) => {
       setPaginationCursor(null);
       return;
     }
-
+    // console.log("return object:", data);
     const data = await fetchDogDetails(dogIds);
+    console.log("🐶 Dog results:", data);
     setDogs(data);
 
     // Save next and prev cursors
@@ -155,6 +161,7 @@ const dogMatch = async() => {
     }
     const { match } = await res.json();
     setMatch(match);
+    setShowMatch(true);
     console.log('Matched dog ID:', match); 
   } 
   catch(error){
@@ -180,54 +187,97 @@ const handlePrevPage = () => {
     setCurrentPage(prev => Math.max(prev - 1, 1));
 };
 
+
+useEffect(() => {
+  setCurrentFilters(prevFilters => {
+    const updatedFilters = {
+      ...prevFilters,
+      zipCodes: locationZips.length > 0 ? locationZips : [],
+    };
+    setCurrentPage(1);
+    fetchDogs(updatedFilters, null);
+    return updatedFilters;
+  });
+}, [locationZips]);
+
+const handleSortChange = (field) => {
+  setSortField(field);
+
+  const updatedFilters = {
+    ...currentFilters,
+    sort: `${field}:${sortAsc ? "asc" : "desc"}`
+  };
+
+  setCurrentFilters(updatedFilters);
+  setCurrentPage(1);
+  fetchDogs(updatedFilters, null);
+};
+
   return (
     <div className="container">
       <Nav/>
       <h1>Hi, Welcome to Fetch's Dog Adoption Search!</h1>
 
+
       <div className="result-container">
-          <div>
-            <h3> Results ({totalResults}) </h3>
+          <div className='results'>
+            <p> Results ({totalResults}) </p>
           </div>
           <div className='sort-dropdown'>
             <label htmlFor="sort">Sort by: </label>
                 <select id="sort" onChange={(e) => handleSortChange(e.target.value)}>
-                  <option value="">Select</option>
+                  <option value="age">Age</option>
                   <option value="breed">Breed</option>
                   <option value="name">Name</option>
-                  <option value="age">Age</option>
                 </select>
           </div>
       </div>
 
+      {showMatch && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-btn" onClick={() => setShowMatch(false)}>✖</button>
+            <h2>Your Best Match!</h2>
+            {dogs.filter(dog => dog.id === match).map(dog => (
+              <div key={dog.id} className="match-card">
+                <img src={dog.img} alt={dog.name} />
+                <h3>{dog.name}</h3>
+                <p>Age: {dog.age}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="main-content">
         
         <div className="filters-buttons">
-          <div className="filters">
-            <FilterBreed breeds={breeds} onFilterChange={handleFilterChange} />
-            <FilterLocation onZipCodes={(zipCodes) => handleFilterChange({ zipCodes })} />
-          </div>
+            <div className="filters">
+              <FilterBreed breeds={breeds} onFilterChange={handleFilterChange}
+                setClearTrigger={setClearTrigger}
+              />
 
-          <div className="match-btn">
-            <button onClick={dogMatch}>Find My Match</button>
-          </div>
+            <FilterLocation
+                onZipCodes={setLocationZips}
+                clearTrigger={clearTrigger}
+              />
+            </div>
+
+            <div className="match-btn">
+              <button onClick={dogMatch}>Find My Match</button>
+            </div>
 
         </div>
 
         <div className="filter-dogs">
-          <DogList dogs={dogs} match={match} />
+            <DogList dogs={dogs} match={match} />
         </div>
       </div>
 
       <div className="pagination">
-        {/* <div>
-          Page {currentPage} of {totalPages}
-        </div> */}
-
-        <button onClick={handlePrevPage} disabled={!paginationCursor?.prev}>Prev</button>
-         Page {currentPage} of {totalPages}
-        <button onClick={handleNextPage} disabled={!paginationCursor?.next}>Next</button>
-     
+        <button onClick={handlePrevPage} disabled={!paginationCursor?.prev}>&lt;</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={!paginationCursor?.next}>&gt;</button>
       </div>
     </div>
   );
