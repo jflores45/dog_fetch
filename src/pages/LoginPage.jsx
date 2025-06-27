@@ -14,7 +14,7 @@ const LoginPage = () => {
         <LoginForm />
       </div>
     </div>
-
+ 
       <div className='right_container'>
         <div className='image_wrapper'>
           <div className="bg_shape"></div>

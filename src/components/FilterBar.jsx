@@ -56,15 +56,18 @@ const handleSortDirectionToggle = () => {
   const newSortAsc = !sortAsc;
   setSortAsc(newSortAsc);
 
-  const updatedFilters = {
-    ...currentFilters,
-    sort: `${sortField}:${newSortAsc ? "asc" : "desc"}`
-  };
-
-  setCurrentFilters(updatedFilters);
-  setCurrentPage(1);
-  fetchDogs(updatedFilters, null);
+  if (typeof onFilterChange === 'function') {
+    onFilterChange({
+      breeds: selectedBreed ? [selectedBreed] : [],
+      zipCodes: zip ? [zip] : [],
+      ageMin,
+      ageMax,
+      sortAsc: newSortAsc,
+      size: size || undefined,
+    });
+  }
 };
+
 
   return (
    <div className="filter-form">
@@ -129,14 +132,19 @@ const handleSortDirectionToggle = () => {
           <div className="slider" />
         </div>
       </div> */}
-      <div className="form-control">
+      
+     <div className="form-control">
         <label>Direction:</label>
-        <div className={`toggle-switch ${sortAsc ? 'asc' : 'desc'}`} onClick={handleSortDirectionToggle}>
+        <div
+          className={`toggle-switch ${sortAsc ? 'asc' : 'desc'}`}
+          onClick={handleSortDirectionToggle}
+        >
           <div className="option">ASC</div>
           <div className="option">DESC</div>
           <div className="slider" />
         </div>
       </div>
+
 
       <div className="form-control">
         <label htmlFor="size">Results per page:</label>

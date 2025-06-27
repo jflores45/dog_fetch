@@ -12,7 +12,7 @@ const SearchPage = () => {
   const [dogs, setDogs] = useState([]);
   const [locationZips, setLocationZips] = useState([]);
   const [sortField, setSortField] = useState("age");
-  // const [sortAsc, setSortAsc] = useState(true); 
+  const [sortAsc, setSortAsc] = useState(true); 
 
   const [match, setMatch] = useState(null);
   const [showMatch, setShowMatch] = useState(false);
@@ -70,8 +70,8 @@ const buildQuery = (filters, cursor = null) => {
   if (filters.ageMax !== undefined) {
     params.append("ageMax", filters.ageMax);
   }
-  if (filters.sort) {
-    params.append("sort", `age:${filters.sort}`);
+  if (filters.sortField && filters.sortAsc !== undefined) {
+    params.append("sort", `${filters.sortField}:${filters.sortAsc ? "asc" : "desc"}`);
   }
 
   params.append("size", filters.size || dogsPerPage);
@@ -139,10 +139,17 @@ const fetchDogs = async (filters, cursor = null) => {
 
 // handle filter changes
 const handleFilterChange = (filters) => {
-  setCurrentFilters(filters);
-  setCurrentPage(1); // reset page if we have updated search
-  fetchDogs(filters, null);
+  const updatedFilters = {
+    ...filters,
+    sortField, // use current dropdown value
+    sort: `${sortField}:${filters.sortAsc ? 'asc' : 'desc'}` // construct proper string
+  };
+
+  setCurrentFilters(updatedFilters);
+  setCurrentPage(1);
+  fetchDogs(updatedFilters, null);
 };
+
 
 // find users dog match
 const dogMatch = async() => {
@@ -200,18 +207,21 @@ useEffect(() => {
   });
 }, [locationZips]);
 
+
 const handleSortChange = (field) => {
   setSortField(field);
 
   const updatedFilters = {
     ...currentFilters,
-    sort: `${field}:${sortAsc ? "asc" : "desc"}`
+    sortField: field,
+    sortAsc, // use current direction
   };
 
   setCurrentFilters(updatedFilters);
   setCurrentPage(1);
   fetchDogs(updatedFilters, null);
 };
+
 
   return (
     <div className="container">
@@ -224,8 +234,10 @@ const handleSortChange = (field) => {
             <p> Results ({totalResults}) </p>
           </div>
           <div className='sort-dropdown'>
+            
             <label htmlFor="sort">Sort by: </label>
-                <select id="sort" onChange={(e) => handleSortChange(e.target.value)}>
+                {/* <select id="sort" onChange={(e) => handleSortChange(e.target.value)}> */}
+                 <select onChange={(e) => handleSortChange(e.target.value)} value={sortField}>
                   <option value="age">Age</option>
                   <option value="breed">Breed</option>
                   <option value="name">Name</option>
@@ -254,7 +266,7 @@ const handleSortChange = (field) => {
         <div className="filters-buttons">
             <div className="filters">
               <FilterBreed breeds={breeds} onFilterChange={handleFilterChange}
-                setClearTrigger={setClearTrigger}
+                setClearTrigger={setClearTrigger} currentFilters={currentFilters}
               />
 
             <FilterLocation
