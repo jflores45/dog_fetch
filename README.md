@@ -1,12 +1,75 @@
-# React + Vite
+# Fetch Frontend Assessment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of contents
 
-Currently, two official plugins are available:
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+This web application allows users to log in and explore adoptable dogs using filters such as breed, location (state, city, zip code), and age range. Users can:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Browse dog profiles
+
+* Mark dogs as favorites ❤️
+
+* Get matched with a dog from their favorites
+
+* Navigate through results with pagination
+
+* Log out securely
+
+## Installation
+
+If you wish to run this app on your local machine, use the following steps (you must have Node.js installed and have a Fetch-provided API key):
+
+- Clone the repository
+  git clone https://github.com/YOUR_USERNAME/fetch-frontend-assessment.git
+  cd fetch-frontend-assessment
+
+- Install all dependencies
+  npm install
+
+- Create a `.env.local` file with the following:
+  `VITE_API_BASE_URL=https://frontend-take-home-service.fetch.com`
+ 
+- Start the app using `npm run start`
+
+## Usage
+
+1. Log in using any valid name and email format.
+
+2. Use the filters to search for dogs by:
+
+- Breed
+
+- State, City, or Zip Code
+
+- Age range
+
+- Sort by age, name, or breed
+
+3. Favorite dogs to keep track of them.
+
+4. Click “Find My Match” to get matched with a dog from your favorites.
+
+5. Use pagination to browse through results.
+
+6. Log out when finished using the top navigation button.
+
+## Technologies Used
+
+This is a frontend application that makes calls to the Fetch API. The following frontend technologies were used:
+
+- React (JavaScript Framework)
+
+- React Router
+
+- CSS Modules for styling
+
+- Fetch API for backend communication
+
+- Vite for fast development
+  
