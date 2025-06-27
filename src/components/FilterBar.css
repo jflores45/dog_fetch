@@ -2,8 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  /* padding: 1rem; */
-  /* background-color: white; */
   border-radius: 12px;
 }
 
@@ -18,7 +16,6 @@
 .form-control input::placeholder {
   color: grey;
 }
-
 
 .form-control input {
   color: grey;
@@ -138,8 +135,6 @@
   align-items: center;
   justify-content: space-between;
   flex: 1 1 100%;
-  /* padding: 10px; */
-  /* margin-bottom: 1rem; */
 }
 
 .form-clear a {
@@ -153,7 +148,6 @@
   text-decoration: none;
   color: #63686d;
 }
-
 
 label {
   margin-bottom: 0.25rem;

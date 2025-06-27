@@ -124,11 +124,9 @@
   .pagination button {
     font-size: 1rem;
     background: none;
-    /* background-color:  #e6e5e3d0; */
     background-color:  #f5ecdad0;
     border: none;
     cursor: pointer;
-    /* color: #333; */
   }
   .pagination span {
     font-weight: 400;
@@ -151,9 +149,7 @@
 
   .modal-content {
     background: white;
-    /* background:  rgb(255, 243, 224, 0.6); */
     border: 3px solid gold;
-    /* background-color: */
     padding: 2rem;
     border-radius: 10px;
     position: relative;

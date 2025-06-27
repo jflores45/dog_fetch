@@ -6,7 +6,6 @@
 }
 
 .title {
-  /* font-size: 2rem; */
   font-weight: 600;
   color: #333;
   margin-bottom: 30px;
@@ -15,8 +14,5 @@
 }
 
 .favs {
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
-  /* gap: 30px; */
-  padding: 20px 0;
+  padding: 20px;
 }

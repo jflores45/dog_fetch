@@ -3,14 +3,14 @@ form {
   flex-direction: column;
   width: 120%;
   max-width: 1000px;
-  min-height: 20vh; /* make it take up more vertical space */
+  min-height: 20vh; 
   margin: 40px auto;
   padding: 4rem 3rem;
   gap: 1.5rem;
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  justify-content: center; /* centers form fields vertically */
+  justify-content: center; 
 }
 
 form input {

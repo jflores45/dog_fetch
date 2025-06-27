@@ -6,10 +6,7 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger, sortField, sortA
   const [selectedBreed, setSelectedBreed] = useState('');
   const [ageMin, setAgeMin] = useState(0);
   const [ageMax, setAgeMax] = useState(10);
-  // const [sortField, setSortField] = useState("age");
-  // const [sortAsc, setSortAsc] = useState(true);
   const [size, setSize] = useState('');
-  // const [clearTrigger, setClearTrigger] = useState(false);
   
   const handleFilterChange = () => {
     if (typeof onFilterChange === "function") {
@@ -49,7 +46,7 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger, sortField, sortA
       size: 25
     });
      if (typeof setClearTrigger === 'function') {
-      setClearTrigger(prev => !prev); // toggles to activate useEffect in FilterLocation
+      setClearTrigger(prev => !prev); 
     }
 };
 
@@ -107,15 +104,6 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger, sortField, sortA
           onChange={(e) => setAgeMax(Number(e.target.value))}
         />
       </div>
-      
-      {/* <div className="form-control">
-        <label>Direction:</label>
-        <div className={toggle-switch ${sortAsc ? 'asc' : 'desc'}} onClick={() => setSortAsc(!sortAsc)}>
-          <div className="option">ASC</div>
-          <div className="option">DESC</div>
-          <div className="slider" />
-        </div>
-      </div> */}
       
      <div className="form-control">
         <label>Direction:</label>

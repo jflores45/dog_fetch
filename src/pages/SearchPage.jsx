@@ -219,20 +219,6 @@ const handleSortChange = (field) => {
   fetchDogs(updatedFilters, null);
 };
 
-// const handleSortDirectionToggle = () => {
-//   const newSortAsc = !sortAsc;
-//   setSortAsc(newSortAsc);
-
-//   const updatedFilters = {
-//     ...currentFilters,
-//     sort: `${sortField}:${newSortAsc ? 'asc' : 'desc'}`
-//   };
-
-//   setCurrentFilters(updatedFilters);
-//   setCurrentPage(1);
-//   fetchDogs(updatedFilters, null);
-// };
-
   return (
     <div className="container">
       <Nav/>
@@ -245,7 +231,6 @@ const handleSortChange = (field) => {
           <div className='sort-dropdown'>
             <label htmlFor="sort">Sort by: </label>
               <select onChange={(e) => handleSortChange(e.target.value)} value={sortField}>
-                {/* <select id="sort" onChange={(e) => handleSortChange(e.target.value)}> */}
                   <option value="age">Age</option>
                   <option value="breed">Breed</option>
                   <option value="name">Name</option>
