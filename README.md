@@ -21,6 +21,11 @@ This web application allows users to log in and explore adoptable dogs using fil
 
 * Log out securely
 
+### 🐶 Login Page
+![Login Page](./screenshots/login.png)
+
+### 🔍 Search & Match Page
+![Search Page](./screenshots/search.png)
 ## Installation
 
 If you wish to run this app on your local machine, use the following steps (you must have Node.js installed and have a Fetch-provided API key):
