@@ -25,17 +25,17 @@ This web application allows users to log in and explore adoptable dogs using fil
 
 If you wish to run this app on your local machine, use the following steps (you must have Node.js installed and have a Fetch-provided API key):
 
-- Clone the repository
-  git clone https://github.com/YOUR_USERNAME/fetch-frontend-assessment.git
-  cd fetch-frontend-assessment
+  - Clone the repository
+    git clone https://github.com/YOUR_USERNAME/fetch-frontend-assessment.git
+    cd fetch-frontend-assessment
 
-- Install all dependencies
-  npm install
+  - Install all dependencies
+    npm install
 
-- Create a `.env.local` file with the following:
-  `VITE_API_BASE_URL=https://frontend-take-home-service.fetch.com`
+  - Create a `.env.local` file with the following:
+    `VITE_API_BASE_URL=https://frontend-take-home-service.fetch.com`
  
-- Start the app using `npm run start`
+  - Start the app using `npm run start`
 
 ## Usage
 
@@ -43,13 +43,13 @@ If you wish to run this app on your local machine, use the following steps (you 
 
 2. Use the filters to search for dogs by:
 
-- Breed
+    - Breed
 
-- State, City, or Zip Code
+    - State, City, or Zip Code
 
-- Age range
+    - Age range
 
-- Sort by age, name, or breed
+    - Sort by age, name, or breed
 
 3. Favorite dogs to keep track of them.
 
@@ -63,13 +63,13 @@ If you wish to run this app on your local machine, use the following steps (you 
 
 This is a frontend application that makes calls to the Fetch API. The following frontend technologies were used:
 
-- React (JavaScript Framework)
+  - React (JavaScript Framework)
 
-- React Router
+  - React Router
 
-- CSS Modules for styling
+  - CSS Modules for styling
 
-- Fetch API for backend communication
+  - Fetch API for backend communication
 
-- Vite for fast development
+  - Vite for fast development
   
