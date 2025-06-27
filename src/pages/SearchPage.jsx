@@ -26,6 +26,7 @@ const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const sizeForPageCount = currentFilters.size || dogsPerPage;
   const totalPages = Math.ceil(totalResults / sizeForPageCount);
+ 
   useEffect(() => {
     console.log("SearchPage mounted. User:", user);
     if (!user) return; // don't fetch unless logged in
@@ -70,12 +71,10 @@ const buildQuery = (filters, cursor = null) => {
   if (filters.ageMax !== undefined) {
     params.append("ageMax", filters.ageMax);
   }
-  if (filters.sortField && filters.sortAsc !== undefined) {
-    params.append("sort", `${filters.sortField}:${filters.sortAsc ? "asc" : "desc"}`);
+  if (filters.sort) {
+    params.append("sort", filters.sort);
   }
-
   params.append("size", filters.size || dogsPerPage);
-
   if (cursor) {
     params.append("from", cursor);
   }
@@ -141,8 +140,7 @@ const fetchDogs = async (filters, cursor = null) => {
 const handleFilterChange = (filters) => {
   const updatedFilters = {
     ...filters,
-    sortField, // use current dropdown value
-    sort: `${sortField}:${filters.sortAsc ? 'asc' : 'desc'}` // construct proper string
+    sort: `${sortField}:${sortAsc ? 'asc' : 'desc'}`,
   };
 
   setCurrentFilters(updatedFilters);
@@ -213,8 +211,7 @@ const handleSortChange = (field) => {
 
   const updatedFilters = {
     ...currentFilters,
-    sortField: field,
-    sortAsc, // use current direction
+    sort: `${field}:${sortAsc ? 'asc' : 'desc'}`
   };
 
   setCurrentFilters(updatedFilters);
@@ -222,22 +219,33 @@ const handleSortChange = (field) => {
   fetchDogs(updatedFilters, null);
 };
 
+// const handleSortDirectionToggle = () => {
+//   const newSortAsc = !sortAsc;
+//   setSortAsc(newSortAsc);
+
+//   const updatedFilters = {
+//     ...currentFilters,
+//     sort: `${sortField}:${newSortAsc ? 'asc' : 'desc'}`
+//   };
+
+//   setCurrentFilters(updatedFilters);
+//   setCurrentPage(1);
+//   fetchDogs(updatedFilters, null);
+// };
 
   return (
     <div className="container">
       <Nav/>
       <h1>Hi, Welcome to Fetch's Dog Adoption Search!</h1>
 
-
       <div className="result-container">
           <div className='results'>
             <p> Results ({totalResults}) </p>
           </div>
           <div className='sort-dropdown'>
-            
             <label htmlFor="sort">Sort by: </label>
+              <select onChange={(e) => handleSortChange(e.target.value)} value={sortField}>
                 {/* <select id="sort" onChange={(e) => handleSortChange(e.target.value)}> */}
-                 <select onChange={(e) => handleSortChange(e.target.value)} value={sortField}>
                   <option value="age">Age</option>
                   <option value="breed">Breed</option>
                   <option value="name">Name</option>
@@ -265,8 +273,14 @@ const handleSortChange = (field) => {
         
         <div className="filters-buttons">
             <div className="filters">
-              <FilterBreed breeds={breeds} onFilterChange={handleFilterChange}
-                setClearTrigger={setClearTrigger} currentFilters={currentFilters}
+              <FilterBreed
+                breeds={breeds}
+                onFilterChange={handleFilterChange}
+                setClearTrigger={setClearTrigger}
+                sortField={sortField}
+                sortAsc={sortAsc}
+                onToggleSortDirection={() => setSortAsc(prev => !prev)}
+                setSortAscDirectly={setSortAsc}
               />
 
             <FilterLocation

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import './FilterBar.css';
 
-function FilterBreed({ breeds, onFilterChange, setClearTrigger }) {
+function FilterBreed({ breeds, onFilterChange, setClearTrigger, sortField, sortAsc, onToggleSortDirection, setSortAscDirectly }) {
   const [zip, setZip] = useState('');
   const [selectedBreed, setSelectedBreed] = useState('');
   const [ageMin, setAgeMin] = useState(0);
   const [ageMax, setAgeMax] = useState(10);
   // const [sortField, setSortField] = useState("age");
-  const [sortAsc, setSortAsc] = useState(true);
+  // const [sortAsc, setSortAsc] = useState(true);
   const [size, setSize] = useState('');
   // const [clearTrigger, setClearTrigger] = useState(false);
   
@@ -18,7 +18,7 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger }) {
         zipCodes: zip ? [zip] : [],
         ageMin,
         ageMax,
-        sort: sortAsc ? 'asc' : 'desc',
+        sort: `${sortField}:${sortAsc ? "asc" : "desc"}`,
         size: size || undefined,
       });
     } 
@@ -36,7 +36,7 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger }) {
     setZip('');
     setAgeMin(0);
     setAgeMax(10);
-    setSortAsc(true);
+    setSortAscDirectly(true);
     setSize('');
 
     // Send reset filter values to parent
@@ -52,22 +52,6 @@ function FilterBreed({ breeds, onFilterChange, setClearTrigger }) {
       setClearTrigger(prev => !prev); // toggles to activate useEffect in FilterLocation
     }
 };
-const handleSortDirectionToggle = () => {
-  const newSortAsc = !sortAsc;
-  setSortAsc(newSortAsc);
-
-  if (typeof onFilterChange === 'function') {
-    onFilterChange({
-      breeds: selectedBreed ? [selectedBreed] : [],
-      zipCodes: zip ? [zip] : [],
-      ageMin,
-      ageMax,
-      sortAsc: newSortAsc,
-      size: size || undefined,
-    });
-  }
-};
-
 
   return (
    <div className="filter-form">
@@ -137,13 +121,14 @@ const handleSortDirectionToggle = () => {
         <label>Direction:</label>
         <div
           className={`toggle-switch ${sortAsc ? 'asc' : 'desc'}`}
-          onClick={handleSortDirectionToggle}
+          onClick={onToggleSortDirection}
         >
           <div className="option">ASC</div>
           <div className="option">DESC</div>
           <div className="slider" />
         </div>
       </div>
+
 
 
       <div className="form-control">
