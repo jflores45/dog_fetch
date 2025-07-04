@@ -15,11 +15,11 @@ This web application allows users to log in and explore adoptable dogs using fil
 
 * Mark dogs as favorites ❤️
 
-* Get matched with a dog from their favorites
+* Get matched with a dog
 
 * Navigate through results with pagination
 
-* Log out securely
+* Log out
 
 ### 🐶 Login Page
 ![Login Page](./screenshots/login.png)
